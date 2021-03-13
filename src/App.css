@@ -36,3 +36,17 @@
     transform: rotate(360deg);
   }
 }
+
+.tic-tac-toe-grid{  
+  width: 609px;
+  height: 459px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;  
+}
+
+.tic-tac-toe-grid-cell{
+  width: 200px;
+  height: 150px;
+  border: 1px solid black;
+}

@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import TicTacToeGrid from './components/TicTacToeGrid.js';
+import TicTacToeGrid from './components/TicTacToeGrid';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
         {/* <p>
           Tic Tac Toe
         </p> */}
-        <TicTacToeGrid />        
+        <TicTacToeGrid />               
       </div>
     </div>
   );

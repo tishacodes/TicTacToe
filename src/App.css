@@ -53,7 +53,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 10rem;
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+  font-size: 8rem;
 }
 
 .grid-cell-no-top {

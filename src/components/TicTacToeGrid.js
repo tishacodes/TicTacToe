@@ -1,4 +1,5 @@
 import React from 'react';
+import ScoreBoard from './ScoreBoard';
 
 function TicTacToeGrid(props){
 
@@ -15,17 +16,21 @@ function TicTacToeGrid(props){
     //     <div className = "tic-tac-toe-grid">{grid}</div>
     // );
     return(
-        <div className = "tic-tac-toe-grid">
-            <div key = {1} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left">X</div>
-            <div key = {2} className = "tic-tac-toe-grid-cell grid-cell-no-top">O</div>
-            <div key = {3} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right">O</div>
-            <div key = {4} className = "tic-tac-toe-grid-cell grid-cell-no-left">O</div>
-            <div key = {5} className = "tic-tac-toe-grid-cell">X</div>
-            <div key = {6} className = "tic-tac-toe-grid-cell grid-cell-no-right">O</div>
-            <div key = {7} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left">O</div>
-            <div key = {8} className = "tic-tac-toe-grid-cell grid-cell-no-bottom">O</div>
-            <div key = {9} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right">X</div>
-        </div>
+        <>
+            <div className = "tic-tac-toe-grid">
+                <div key = {1} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left">X</div>
+                <div key = {2} className = "tic-tac-toe-grid-cell grid-cell-no-top">O</div>
+                <div key = {3} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right">O</div>
+                <div key = {4} className = "tic-tac-toe-grid-cell grid-cell-no-left">O</div>
+                <div key = {5} className = "tic-tac-toe-grid-cell">X</div>
+                <div key = {6} className = "tic-tac-toe-grid-cell grid-cell-no-right">O</div>
+                <div key = {7} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left">O</div>
+                <div key = {8} className = "tic-tac-toe-grid-cell grid-cell-no-bottom">O</div>
+                <div key = {9} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right">X</div>
+            </div>
+
+            <ScoreBoard /> 
+        </>
     );
 }
 

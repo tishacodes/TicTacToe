@@ -1,5 +1,5 @@
 import React from 'react';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import RefreshIcon from '@mui/icons-material/Refresh';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 //import Grid3x3Icon from '@mui/icons-material/Grid3x3';
 function ResetBoard() {
@@ -7,7 +7,7 @@ function ResetBoard() {
     return(
         <div className="reset-board-div">
             <div style={{ cursor: 'pointer' }}>
-                <RestartAltIcon fontSize='large'/>                
+                <RefreshIcon fontSize='large'/>                
             </div>
 
             <div style={{ cursor: 'pointer' }}>

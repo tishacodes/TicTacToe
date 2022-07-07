@@ -1,5 +1,10 @@
-.App {
+.App {  
   text-align: center;
+  background-color: #282c34;  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
 }
 
 .App-logo {
@@ -13,7 +18,7 @@
   }
 }
 
-.App-header {
+.App-header {  
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -21,7 +26,7 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: white;  
 }
 
 .App-link {
@@ -37,22 +42,40 @@
   }
 }
 
-.tic-tac-toe-main-div {  
+.tic-tac-toe-main-div {    
+  width: 612px;
   display: flex;
   flex-direction: column;
   align-content: space-between;  
 }
 
-.tic-tac-toe-grid {  
-  width: 612px;  
+@media (max-width: 619px) {
+  .tic-tac-toe-main-div{
+    width: 100%;
+  }
+
+}
+
+.reset-board-div {  
+  width: 100%;
   display: flex;
   flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+}
+
+.tic-tac-toe-grid {    
+  width: 100%;  
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   flex-wrap: wrap;  
+  margin-top: 5%;
   margin-bottom: 10%;
 }
 
 .tic-tac-toe-grid-cell {
-  width: 200px;
+  width: 30%;
   height: 150px;
   border: 3px solid white;  
   cursor: pointer;
@@ -61,6 +84,12 @@
   align-items: center;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-size: 8rem;
+}
+
+@media (max-width: 619px) {
+  .tic-tac-toe-main-div{
+    width: 100%;
+  }
 }
 
 .grid-cell-no-top {
@@ -80,11 +109,11 @@
 }
 
 .score-board-div {  
-  width: 612px;  
+  width: 100%;  
   display: flex;
   flex-direction: row;
   justify-content: center;
-  flex-wrap: no-wrap;  
+  flex-wrap: nowrap;  
 }
 
 .player-score-div {

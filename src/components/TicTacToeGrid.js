@@ -1,22 +1,13 @@
 import React from 'react';
+import ResetBoard from './ResetBoard';
 import ScoreBoard from './ScoreBoard';
 
-function TicTacToeGrid(props){
-
-    // const ROWS = 3;
-    // const COLS = 3;
-    // var grid = [];
-    // for(let i = 0; i < ROWS; i++){
-    //     for(let j = 0; j < COLS; j++){
-    //         grid.push(<div className = "tic-tac-toe-grid-cell">cell</div>);
-    //     }
-    // }    
-
-    // return(
-    //     <div className = "tic-tac-toe-grid">{grid}</div>
-    // );
+function TicTacToeGrid(props) {
+    
     return(
         <div className="tic-tac-toe-main-div">
+            <ResetBoard/>
+
             <div className = "tic-tac-toe-grid">
                 <div key = {1} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left">X</div>
                 <div key = {2} className = "tic-tac-toe-grid-cell grid-cell-no-top">O</div>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-function ScoreBoard(props){
+function ScoreBoard(props) {
 
     return (
         <div className="score-board-div">

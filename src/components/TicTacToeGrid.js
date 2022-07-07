@@ -3,8 +3,8 @@ import ResetBoard from './ResetBoard';
 import ScoreBoard from './ScoreBoard';
 
 function TicTacToeGrid(props) {
-    const [playerScore, setPlayerScore] = useState(10);
-    const [computerScore, setComputerScore] = useState(20);
+    const [playerScore, setPlayerScore] = useState(0);
+    const [computerScore, setComputerScore] = useState(0);
     const [gridData, setGridData] = useState({
         // 1: 'X',
         // 2: 'O',
@@ -19,7 +19,11 @@ function TicTacToeGrid(props) {
     
     return(
         <div className="tic-tac-toe-main-div">
-            <ResetBoard gridData={gridData} setGridData={setGridData} />
+            <ResetBoard gridData={gridData} 
+                        setGridData={setGridData} 
+                        setPlayerScore={setPlayerScore} 
+                        setComputerScore={setComputerScore}
+            />
 
             <div className = "tic-tac-toe-grid">
                 <div key = {1} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"> {gridData['1']} </div>

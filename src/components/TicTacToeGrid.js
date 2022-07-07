@@ -16,7 +16,7 @@ function TicTacToeGrid(props){
     //     <div className = "tic-tac-toe-grid">{grid}</div>
     // );
     return(
-        <>
+        <div className="tic-tac-toe-main-div">
             <div className = "tic-tac-toe-grid">
                 <div key = {1} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left">X</div>
                 <div key = {2} className = "tic-tac-toe-grid-cell grid-cell-no-top">O</div>
@@ -29,8 +29,8 @@ function TicTacToeGrid(props){
                 <div key = {9} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right">X</div>
             </div>
 
-            <ScoreBoard /> 
-        </>
+            <ScoreBoard playerScore={10} computerScore={20}/> 
+        </div>
     );
 }
 

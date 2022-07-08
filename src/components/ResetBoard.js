@@ -16,9 +16,10 @@ function ResetBoard(props) {
     }
 
     return(
-        <div className="reset-board-div">
+        <div role="heading" aria-level="1" aria-label="tic tac toe game header with reset controls" className="reset-board-div">
             <div style={{ cursor: 'pointer' }} onClick={(event) => refreshScoreBoard(event)}>
-                <RefreshIcon fontSize='large'/>                
+                {/* <RefreshIcon fontSize='large'/>                 */}
+                <p>TEST</p>
             </div>
 
             <div style={{ cursor: 'pointer' }} onClick={(event) => refreshGameBoard(event)}>

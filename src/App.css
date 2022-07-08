@@ -53,7 +53,14 @@
   .tic-tac-toe-main-div{
     width: 100%;
   }
+}
 
+@media (max-width: 629px) {
+  .tic-tac-toe-main-div {
+    width: 500px;  
+    overflow-x: auto;
+    overflow-y: auto;  
+  }
 }
 
 .reset-board-div {  
@@ -62,6 +69,12 @@
   flex-direction: row;
   flex-wrap: nowrap;
   justify-content: space-between;
+}
+
+@media (max-width: 499px) {
+  .reset-board-div {
+    justify-content: space-around;
+  }
 }
 
 .tic-tac-toe-grid {    
@@ -84,12 +97,6 @@
   align-items: center;
   font-family: "Comic Sans MS", "Comic Sans", cursive;
   font-size: 8rem;
-}
-
-@media (max-width: 619px) {
-  .tic-tac-toe-main-div{
-    width: 100%;
-  }
 }
 
 .grid-cell-no-top {

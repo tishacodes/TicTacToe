@@ -3,7 +3,7 @@ import TicTacToeGrid from './components/TicTacToeGrid';
 
 function App() {
   return (
-    <div className="App">
+    <div role="main" className="App">
       <div className="App-header">       
         <TicTacToeGrid />               
       </div>

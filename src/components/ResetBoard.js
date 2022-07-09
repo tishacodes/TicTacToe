@@ -21,15 +21,19 @@ function ResetBoard(props) {
     return(
         <div role="heading" aria-level="1" aria-label="tic tac toe game header with reset controls" className="reset-board-div">
             <Tooltip title="Reset Scores">
-                <IconButton disabled={disabled} aria-label="reset scores" style={disabled ? { color: 'gray' } : {color: 'inherit'} } onClick={(event) => refreshScoreBoard(event)}>
-                    <RefreshIcon fontSize="large" color="inherit" style={{ cursor: 'pointer', margin: 0 }}/>                
-                </IconButton>
+                <span>
+                    <IconButton disabled={disabled} aria-label="reset scores" style={disabled ? { color: 'gray' } : {color: 'inherit'} } onClick={(event) => refreshScoreBoard(event)}>
+                        <RefreshIcon fontSize="large" color="inherit" style={{ cursor: 'pointer', margin: 0 }}/>                
+                    </IconButton>
+                </span>
             </Tooltip>
 
             <Tooltip title="New Game">
-                <IconButton disabled={disabled} aria-label="reset current game" style={disabled ? { color: 'gray' } : {color: 'inherit'} } onClick={(event) => refreshGameBoard(event)}>
-                    <FiberNewIcon fontSize="large" color="inherit" style={{ cursor: 'pointer' }}/>
-                </IconButton>
+                <span>
+                    <IconButton disabled={disabled} aria-label="reset current game" style={disabled ? { color: 'gray' } : {color: 'inherit'} } onClick={(event) => refreshGameBoard(event)}>
+                        <FiberNewIcon fontSize="large" color="inherit" style={{ cursor: 'pointer' }}/>
+                    </IconButton>
+                </span>
             </Tooltip>
         </div>
     );

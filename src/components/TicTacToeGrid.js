@@ -21,6 +21,8 @@ function TicTacToeGrid(props) {
         <div className="tic-tac-toe-main-div">
             <ResetBoard gridData={gridData} 
                         setGridData={setGridData} 
+                        playerScore={playerScore}
+                        computerScore={computerScore}
                         setPlayerScore={setPlayerScore} 
                         setComputerScore={setComputerScore}
             />

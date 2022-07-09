@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { IconButton, Tooltip } from "@material-ui/core";
 import RefreshIcon from '@mui/icons-material/Refresh';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
 
 function ResetBoard(props) {
@@ -35,15 +36,26 @@ function ResetBoard(props) {
     }
 
     return(
-        <div role="heading" aria-level="1" aria-label="tic tac toe game header with reset controls" className="reset-board-div">
-            <Tooltip title="Reset Scores to Zero(0)">
+        <div role="heading" aria-level="1" aria-label="tic tac toe game header with game controls" className="reset-board-div">
+            <Tooltip title="Reset Scores to Zero">
                 <span>
                     <IconButton 
                             disabled={resetDisabled} 
-                            aria-label="reset scores" style={resetDisabled ? { color: 'gray' } : {color: 'inherit'} } 
+                            aria-label="reset scores to zero" style={resetDisabled ? { color: 'gray' } : {color: 'inherit'} } 
                             onClick={(event) => refreshScoreBoard(event)}
-                        >
-                            <RefreshIcon fontSize="large" color="inherit" style={{ cursor: 'pointer', margin: 0 }}/>                
+                    >
+                            <RefreshIcon fontSize="medium" color="inherit" style={{ cursor: 'pointer' }}/>                
+                    </IconButton>
+                </span>
+            </Tooltip>
+
+            <Tooltip title="Click on an empty square to play">
+                <span>
+                    <IconButton
+                        aria-label="click on an empty square to play" 
+                        style={{ color: 'inherit', cursor: 'default' }}
+                    >
+                        <QuestionMarkIcon fontSize="medium" color="inherit"/>
                     </IconButton>
                 </span>
             </Tooltip>
@@ -51,11 +63,11 @@ function ResetBoard(props) {
             <Tooltip title="New Game / Restart Game In Progress">
                 <span>
                     <IconButton disabled={newButtonDisabled} 
-                        aria-label="reset current game" 
+                        aria-label="new game / restart game in progress" 
                         style={newButtonDisabled ? { color: 'gray' } : {color: 'inherit'} } 
                         onClick={(event) => refreshGameBoard(event)}
                     >
-                        <FiberNewIcon fontSize="large" color="inherit" style={{ cursor: 'pointer' }}/>
+                        <FiberNewIcon fontSize="medium" color="inherit" style={{ cursor: 'pointer' }}/>
                     </IconButton>
                 </span>
             </Tooltip>

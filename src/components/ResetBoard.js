@@ -1,11 +1,11 @@
-import React from 'react';
-import { IconButton } from "@material-ui/core";
+import React, { useState } from 'react';
+import { IconButton, Tooltip } from "@material-ui/core";
 import RefreshIcon from '@mui/icons-material/Refresh';
 import FiberNewIcon from '@mui/icons-material/FiberNew';
-//import CancelIcon from '@material-ui/icons/Cancel';
-
 
 function ResetBoard(props) {
+
+    const [disabled, setDisabled] = useState(true);
 
     const refreshScoreBoard = (event) => {  
         event.preventDefault();         
@@ -18,25 +18,19 @@ function ResetBoard(props) {
         props.setGridData({});
     }
 
-//     <div role="heading" aria-level="1" aria-label="tic tac toe game header with reset controls" className="reset-board-div">
-//     <button disabled style={{ border: 0, padding: 0 }} onClick={(event) => refreshScoreBoard(event)}>
-//         <RefreshIcon component="button" sx={{ fontSize: 40 }} />                
-//     </button>
-
-//     <button className="new-button" disabled style={{ cursor: 'pointer', border: 0, padding: 0, backgroundColor: '#282c34' }} onClick={(event) => refreshGameBoard(event)}>
-//         <FiberNewIcon sx={{ fontSize: 40 }}  />
-//     </button>
-// </div>
-
     return(
         <div role="heading" aria-level="1" aria-label="tic tac toe game header with reset controls" className="reset-board-div">
-            <IconButton disabled aria-label="reset scores" color="inherit" onClick={(event) => refreshScoreBoard(event)}>
-                <RefreshIcon fontSize="large" color="inherit" style={{ cursor: 'pointer', margin: 0 }}/>                
-            </IconButton>
+            <Tooltip title="Reset Scores">
+                <IconButton disabled={disabled} aria-label="reset scores" style={disabled ? { color: 'gray' } : {color: 'inherit'} } onClick={(event) => refreshScoreBoard(event)}>
+                    <RefreshIcon fontSize="large" color="inherit" style={{ cursor: 'pointer', margin: 0 }}/>                
+                </IconButton>
+            </Tooltip>
 
-            <IconButton disabled aria-label="reset current game" color="inherit" onClick={(event) => refreshGameBoard(event)}>
-                <FiberNewIcon fontSize="large" color="inherit" style={{ cursor: 'pointer' }}/>
-            </IconButton>
+            <Tooltip title="New Game">
+                <IconButton disabled={disabled} aria-label="reset current game" style={disabled ? { color: 'gray' } : {color: 'inherit'} } onClick={(event) => refreshGameBoard(event)}>
+                    <FiberNewIcon fontSize="large" color="inherit" style={{ cursor: 'pointer' }}/>
+                </IconButton>
+            </Tooltip>
         </div>
     );
 }

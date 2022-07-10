@@ -16,7 +16,8 @@ function ResetBoard(props) {
             setResetDisabled(true);
         }
 
-        if(props.gridData && Object.keys(props.gridData) && Object.keys(props.gridData).length && Object.keys(props.gridData).length > 0){                        
+        if(props.gridData && Object.keys(props.gridData) && Object.keys(props.gridData).length && Object.keys(props.gridData).length > 0){  
+            //console.log('props.gridData', props.gridData);                      
             setNewButtonDisabled(false);
         }else{
             setNewButtonDisabled(true);

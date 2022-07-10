@@ -17,6 +17,48 @@ function TicTacToeGrid(props) {
         // 9: ''
     });
     
+    const gridCellOnClick = (event) => {
+        //console.log('on click', event);
+        let elementId = event && event.target && event.target.id ? event.target.id : null;
+        let takenGrids = [];
+        let randomNumber = null;
+       
+        if(elementId){
+            let playerElement = document.getElementById(elementId);
+            
+            if(playerElement.innerHTML === ''){
+                playerElement.innerHTML = 'X';
+                gridData[elementId] = playerElement.innerHTML;      
+                setGridData({ ...gridData });      
+
+                takenGrids = Object.keys(gridData);
+                //console.log('taken grids', takenGrids);
+
+                do{
+                    randomNumber = Math.floor(Math.random() * 9) + 1;
+
+                }while(takenGrids.includes(randomNumber.toString()) && takenGrids.length < 9);
+                
+                //console.log('random number', randomNumber);
+
+                let computerElement = document.getElementById(randomNumber);
+
+                if(computerElement.innerHTML === ''){
+                    computerElement.innerHTML = 'O';
+                    gridData[randomNumber] = computerElement.innerHTML;      
+                    setGridData({ ...gridData });  
+
+                    takenGrids = Object.keys(gridData);
+                    //console.log('taken grids', takenGrids);
+                }
+            }      
+           
+            //console.log('playerElement', playerElement);
+            //console.log('computerElement', computerElement);
+            //console.log('gridData in gridCellOnClick', gridData);
+        }        
+    }    
+ 
     return(
         <div className="tic-tac-toe-main-div">
             <ResetBoard gridData={gridData} 
@@ -27,16 +69,43 @@ function TicTacToeGrid(props) {
                         setComputerScore={setComputerScore}
             />
 
-            <div className = "tic-tac-toe-grid">
-                <div key = {1} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"> {gridData['1']} </div>
-                <div key = {2} className = "tic-tac-toe-grid-cell grid-cell-no-top"> {gridData['2']} </div>
-                <div key = {3} className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right"> {gridData['3']} </div>
-                <div key = {4} className = "tic-tac-toe-grid-cell grid-cell-no-left"> {gridData['4']} </div>
-                <div key = {5} className = "tic-tac-toe-grid-cell"> {gridData['5']} </div>
-                <div key = {6} className = "tic-tac-toe-grid-cell grid-cell-no-right"> {gridData['6']} </div>
-                <div key = {7} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left"> {gridData['7']} </div>
-                <div key = {8} className = "tic-tac-toe-grid-cell grid-cell-no-bottom"> {gridData['8']} </div>
-                <div key = {9} className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right"> {gridData['9']} </div>
+            <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
+                <div key = {1} id = {1} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"> 
+                        {gridData['1']} 
+                </div>
+                <div key = {2} id = {2} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top"> 
+                        {gridData['2']} 
+                </div>
+                <div key = {3} id = {3} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right"> 
+                        {gridData['3']} 
+                </div>
+                <div key = {4} id = {4} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-left"> 
+                        {gridData['4']} 
+                </div>
+                <div key = {5} id = {5} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell"> 
+                        {gridData['5']} 
+                </div>
+                <div key = {6} id = {6} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-right"> 
+                        {gridData['6']} 
+                </div>
+                <div key = {7} id = {7} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left"> 
+                        {gridData['7']} 
+                </div>
+                <div key = {8} id = {8} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom"> 
+                        {gridData['8']} 
+                </div>
+                <div key = {9} id = {9} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right"> 
+                        {gridData['9']} 
+                </div>
             </div>
 
             <ScoreBoard playerScore={playerScore} 

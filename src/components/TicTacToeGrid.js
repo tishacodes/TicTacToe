@@ -4,6 +4,7 @@ import ScoreBoard from './ScoreBoard';
 import GameStatusModal from './GameStatusModal';
 
 function TicTacToeGrid(props) {
+    let gameOverMsg = 'YOU WIN!!!';
     let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
@@ -130,6 +131,7 @@ function TicTacToeGrid(props) {
 
             <GameStatusModal gameStatusModalOpen={gameStatusModalOpen} 
                              setGameStatusModalOpen={setGameStatusModalOpen}
+                             gameOverMsg = {gameOverMsg}
                              gridData={gridData} 
                              setGridData={setGridData} 
             />

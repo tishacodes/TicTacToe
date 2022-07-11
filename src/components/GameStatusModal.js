@@ -29,7 +29,7 @@ export default function GameStatusModal(props) {
         aria-describedby="alert-dialog-description">       
         <DialogContent style={{ display: 'flex', justifyContent: 'center' }}>
           <DialogContentText id="alert-dialog-description" style={{ marginTop: '20px' }}>
-            <span style={{ fontStyle: 'bold', fontSize: '20px', color: '#282c34' }}> YOU WIN!!! </span>
+            <span style={{ fontStyle: 'bold', fontSize: '20px', color: '#282c34' }}> {props.gameOverMsg} </span>
           </DialogContentText>
         </DialogContent>
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>

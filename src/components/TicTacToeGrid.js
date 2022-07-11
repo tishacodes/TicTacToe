@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ResetBoard from './ResetBoard';
 import ScoreBoard from './ScoreBoard';
+import GameStatusModal from './GameStatusModal';
 
 function TicTacToeGrid(props) {
     const [playerScore, setPlayerScore] = useState(0);
@@ -19,7 +20,6 @@ function TicTacToeGrid(props) {
     });
     
     const gridCellOnClick = (event) => {
-
         if(gridData.length === 9 || gameOver){
             return;
         }
@@ -122,6 +122,8 @@ function TicTacToeGrid(props) {
                         setPlayerScore={setPlayerScore} 
                         setComputerScore={setComputerScore}
             /> 
+
+            <GameStatusModal/>
         </div>
     );
 }

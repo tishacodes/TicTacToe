@@ -4,6 +4,7 @@ import ScoreBoard from './ScoreBoard';
 import GameStatusModal from './GameStatusModal';
 
 function TicTacToeGrid(props) {
+    let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
     const [gameOver, setGameOver] = useState(false);
@@ -19,11 +20,7 @@ function TicTacToeGrid(props) {
         // 9: ''
     });
     
-    const gridCellOnClick = (event) => {
-        if(gridData.length === 9 || gameOver){
-            return;
-        }
-
+    const gridCellOnClick = (event) => {        
         //console.log('on click', event);
         let elementId = event && event.target && event.target.id ? event.target.id : null;
         let takenGrids = [];
@@ -65,7 +62,15 @@ function TicTacToeGrid(props) {
             //console.log('playerElement', playerElement);
             //console.log('computerElement', computerElement);
             //console.log('gridData in gridCellOnClick', gridData);
-        }        
+        }   
+        
+        if(Object.keys(gridData).length >= 9 || gameOver){           
+            gameStatusModalOpen = true;
+            setGameStatusModalOpen(true);            
+        }else{
+            gameStatusModalOpen = false;
+            setGameStatusModalOpen(false);
+        }
     }    
  
     return(
@@ -123,7 +128,11 @@ function TicTacToeGrid(props) {
                         setComputerScore={setComputerScore}
             /> 
 
-            <GameStatusModal/>
+            <GameStatusModal gameStatusModalOpen={gameStatusModalOpen} 
+                             setGameStatusModalOpen={setGameStatusModalOpen}
+                             gridData={gridData} 
+                             setGridData={setGridData} 
+            />
         </div>
     );
 }

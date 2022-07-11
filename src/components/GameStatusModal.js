@@ -6,43 +6,37 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 
-export default function GameStatusModal() {
+export default function GameStatusModal(props) {
   const [open, setOpen] = React.useState(true);
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  const handleNewGameClick = () => {
+    props.setGridData({});
+    props.setGameStatusModalOpen(false);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  const handleCancelClick = () => {
+    props.setGameStatusModalOpen(false);
   };
 
   return (
-    <div>
-      {/* <Button variant="outlined" onClick={handleClickOpen}>
-        Open alert dialog
-      </Button> */}
-      <Dialog
-        open={open}
-        onClose={handleClose}
+    <div>      
+      <Dialog        
+        open={props.gameStatusModalOpen}
+        onClose={handleCancelClick}
         fullWidth={true}
         maxWidth={'xs'}        
         aria-labelledby="alert-dialog-title"
-        aria-describedby="alert-dialog-description"        
-      >
-        {/* <DialogTitle id="alert-dialog-title">
-          {"Use Google's location service?"}
-        </DialogTitle> */}
+        aria-describedby="alert-dialog-description">       
         <DialogContent style={{ display: 'flex', justifyContent: 'center' }}>
           <DialogContentText id="alert-dialog-description" style={{ marginTop: '20px' }}>
-            YOU WIN!!!
+            <span style={{ fontStyle: 'bold', fontSize: '20px', color: '#282c34' }}> YOU WIN!!! </span>
           </DialogContentText>
         </DialogContent>
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button variant="contained" size="small" color="success" style={{ marginRight: '5%' }} onClick={handleClose}>NEW GAME</Button>
-          <Button variant="outlined" size="small" color="error" onClick={handleClose} autoFocus>
-            CANCEL
+          <Button variant="outlined" size="small" color="success" style={{ marginRight: '5%' }} onClick={handleNewGameClick}> 
+            NEW GAME 
           </Button>
+          <Button variant="outlined" size="small" onClick={handleCancelClick}> CANCEL </Button>
         </DialogActions>
       </Dialog>
     </div>

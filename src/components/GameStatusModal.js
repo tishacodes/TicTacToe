@@ -39,8 +39,8 @@ export default function GameStatusModal() {
           </DialogContentText>
         </DialogContent>
         <DialogActions style={{ display: 'flex', justifyContent: 'center' }}>
-          <Button variant="contained" style={{ marginRight: '5%' }} onClick={handleClose}>PLAY AGAIN</Button>
-          <Button variant="outlined" onClick={handleClose} autoFocus>
+          <Button variant="contained" size="small" color="success" style={{ marginRight: '5%' }} onClick={handleClose}>NEW GAME</Button>
+          <Button variant="outlined" size="small" color="error" onClick={handleClose} autoFocus>
             CANCEL
           </Button>
         </DialogActions>

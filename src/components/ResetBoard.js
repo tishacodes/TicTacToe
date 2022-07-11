@@ -27,13 +27,14 @@ function ResetBoard(props) {
 
     const refreshScoreBoard = (event) => {  
         event.preventDefault();         
-        props.setPlayerScore(55);
+        props.setPlayerScore(0);
         props.setComputerScore(0);
     }
 
     const refreshGameBoard = (event) => {
         event.preventDefault(); 
         props.setGridData({});
+        props.setGameOver(false);
     }
 
     return(

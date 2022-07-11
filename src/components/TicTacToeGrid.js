@@ -4,7 +4,7 @@ import ScoreBoard from './ScoreBoard';
 import GameStatusModal from './GameStatusModal';
 
 function TicTacToeGrid(props) {
-    let gameOverMsg = 'YOU WIN!!!';
+    let [gameOverMsg, setGameOverMsg] = useState('');
     let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
@@ -65,6 +65,23 @@ function TicTacToeGrid(props) {
             //console.log('gridData in gridCellOnClick', gridData);
         }   
         
+        let regX = new RegExp('X','gi');
+        let regO = new RegExp('O', 'gi');        
+       
+        if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length > Object.values(gridData).join('').match(regO).length){                     
+            setPlayerScore(playerScore + 1);   
+            setGameOver(true); 
+            setGameOverMsg('YOU WIN!!!');   
+        }else if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length < Object.values(gridData).join('').match(regO).length){
+            console.log('second if');
+            setComputerScore(computerScore + 1);
+            setGameOver(true);
+            setGameOverMsg('COMPUTER WINS!!!');
+        }
+        // else{
+        //     setGameOverMsg("IT'S A TIE!!!");
+        // }
+
         if(Object.keys(gridData).length >= 9 || gameOver){           
             gameStatusModalOpen = true;
             setGameStatusModalOpen(true);            
@@ -82,6 +99,7 @@ function TicTacToeGrid(props) {
                         computerScore={computerScore}
                         setPlayerScore={setPlayerScore} 
                         setComputerScore={setComputerScore}
+                        setGameOver={setGameOver}
             />
 
             <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
@@ -134,6 +152,7 @@ function TicTacToeGrid(props) {
                              gameOverMsg = {gameOverMsg}
                              gridData={gridData} 
                              setGridData={setGridData} 
+                             setGameOver={setGameOver}
             />
         </div>
     );

@@ -5,6 +5,7 @@ import ScoreBoard from './ScoreBoard';
 function TicTacToeGrid(props) {
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
+    const [gameOver, setGameOver] = useState(false);
     const [gridData, setGridData] = useState({
         // 1: 'X',
         // 2: 'O',
@@ -18,6 +19,11 @@ function TicTacToeGrid(props) {
     });
     
     const gridCellOnClick = (event) => {
+
+        if(gridData.length === 9 || gameOver){
+            return;
+        }
+
         //console.log('on click', event);
         let elementId = event && event.target && event.target.id ? event.target.id : null;
         let takenGrids = [];
@@ -41,15 +47,18 @@ function TicTacToeGrid(props) {
                 
                 //console.log('random number', randomNumber);
 
-                let computerElement = document.getElementById(randomNumber);
+                let computerElement = document.getElementById(randomNumber);                
 
                 if(computerElement.innerHTML === ''){
-                    computerElement.innerHTML = 'O';
-                    gridData[randomNumber] = computerElement.innerHTML;      
-                    setGridData({ ...gridData });  
-
-                    takenGrids = Object.keys(gridData);
-                    //console.log('taken grids', takenGrids);
+                    setTimeout(function(){
+                        computerElement.innerHTML = 'O';
+                        gridData[randomNumber] = computerElement.innerHTML;      
+                        setGridData({ ...gridData });  
+    
+                        takenGrids = Object.keys(gridData);
+                        //console.log('taken grids', takenGrids);
+                    }, 300);
+                  
                 }
             }      
            

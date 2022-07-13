@@ -22,6 +22,46 @@ function TicTacToeGrid(props) {
     });
 
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
+
+    const gameWinner = () => {
+        console.log('game winner called');
+        
+        for(let i = 0; i < answerArr.length; i++){
+            let containsGridCell = answerArr[i].every(element => {
+                return Object.keys(gridData).includes(element);
+            });
+
+            if(contains){
+                let xCount = 0, oCount = 0;
+
+                for(let j = 0; j < answerArr[i].length; j++){
+                    if(gridData[answerArr[i] === 'X']){
+                        xCount++;
+                    }
+
+                    if(gridData[answerArr[i] === 'O']){
+                        oCount++;
+                    }
+                }
+
+                if(xCount === 3){
+                    setPlayerScore(playerScore + 1);
+                    setGameOverMsg('YOU WIN!!!'); 
+                    setGameOver(true);
+                    break;
+                }else if(oCount === 3){
+                    setComputerScore(computerScore + 1);
+                    setGameOverMsg('COMPUTER WINS!!!');
+                    setGameOver(true);
+                    break;
+                }else if(gridData.length === 9){
+                    setGameOverMsg("IT'S A TIE!!!");
+                    setGameOver(true);
+                    break;
+                }
+            }
+        }
+    }
     
     const gridCellOnClick = (event) => {        
         //console.log('on click', event);
@@ -69,17 +109,19 @@ function TicTacToeGrid(props) {
         
         let regX = new RegExp('X','gi');
         let regO = new RegExp('O', 'gi');        
+
+        gameWinner();
        
-        if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length > Object.values(gridData).join('').match(regO).length){                     
-            setPlayerScore(playerScore + 1);   
-            setGameOver(true); 
-            setGameOverMsg('YOU WIN!!!');   
-        }else if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length < Object.values(gridData).join('').match(regO).length){
-            console.log('second if');
-            setComputerScore(computerScore + 1);
-            setGameOver(true);
-            setGameOverMsg('COMPUTER WINS!!!');
-        }
+        // if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length > Object.values(gridData).join('').match(regO).length){                     
+        //     setPlayerScore(playerScore + 1);   
+        //     setGameOver(true); 
+        //     setGameOverMsg('YOU WIN!!!');   
+        // }else if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length < Object.values(gridData).join('').match(regO).length){
+        //     console.log('second if');
+        //     setComputerScore(computerScore + 1);
+        //     setGameOver(true);
+        //     setGameOverMsg('COMPUTER WINS!!!');
+        // }
         // else{
         //     setGameOverMsg("IT'S A TIE!!!");
         // }

@@ -8,7 +8,7 @@ function TicTacToeGrid(props) {
     let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
-    const [gameOver, setGameOver] = useState(false);
+    let [gameOver, setGameOver] = useState(false);
     const [gridData, setGridData] = useState({
         // 1: 'X',
         // 2: 'O',
@@ -23,42 +23,56 @@ function TicTacToeGrid(props) {
 
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
-    const gameWinner = () => {
-        console.log('game winner called');
-        
+    const gameStatsUpdate = () => {       
+        //console.log('Object.keys(gridData)', Object.keys(gridData));
+
         for(let i = 0; i < answerArr.length; i++){
             let containsGridCell = answerArr[i].every(element => {
-                return Object.keys(gridData).includes(element);
+                console.log('element', element);
+                return Object.keys(gridData).includes(element.toString());
             });
 
-            if(contains){
+            debugger;
+
+            if(containsGridCell){
+                debugger;
                 let xCount = 0, oCount = 0;
 
                 for(let j = 0; j < answerArr[i].length; j++){
-                    if(gridData[answerArr[i] === 'X']){
+                    if(gridData[answerArr[i][j]] === 'X'){
                         xCount++;
                     }
 
-                    if(gridData[answerArr[i] === 'O']){
+                    if(gridData[answerArr[i][j]] === 'O'){
                         oCount++;
                     }
                 }
 
                 if(xCount === 3){
+                    debugger;
                     setPlayerScore(playerScore + 1);
                     setGameOverMsg('YOU WIN!!!'); 
+                    gameOver = true;
                     setGameOver(true);
                     break;
                 }else if(oCount === 3){
+                    debugger;
                     setComputerScore(computerScore + 1);
                     setGameOverMsg('COMPUTER WINS!!!');
-                    setGameOver(true);
-                    break;
-                }else if(gridData.length === 9){
-                    setGameOverMsg("IT'S A TIE!!!");
+                    gameOver = true;
                     setGameOver(true);
                     break;
                 }
+            }
+
+            debugger;
+
+            if(Object.keys(gridData).length === 9){
+                debugger;
+                setGameOverMsg("IT'S A TIE!!!");
+                gameOver = true;
+                setGameOver(true);
+                break;
             }
         }
     }
@@ -68,50 +82,55 @@ function TicTacToeGrid(props) {
         let elementId = event && event.target && event.target.id ? event.target.id : null;
         let takenGrids = [];
         let randomNumber = null;
+
+        if(gameOver){
+            debugger;
+            return;
+        }
        
         if(elementId){
             let playerElement = document.getElementById(elementId);
+            let regX = new RegExp('X','gi');
+            let regO = new RegExp('O', 'gi'); 
             
             if(playerElement.innerHTML === ''){
                 playerElement.innerHTML = 'X';
                 gridData[elementId] = playerElement.innerHTML;      
                 setGridData({ ...gridData });      
 
-                takenGrids = Object.keys(gridData);
-                //console.log('taken grids', takenGrids);
+                takenGrids = Object.keys(gridData);                
 
                 do{
                     randomNumber = Math.floor(Math.random() * 9) + 1;
 
-                }while(takenGrids.includes(randomNumber.toString()) && takenGrids.length < 9);
+                }while(takenGrids.includes(randomNumber.toString()) && takenGrids.length < 9);               
                 
-                //console.log('random number', randomNumber);
-
                 let computerElement = document.getElementById(randomNumber);                
 
                 if(computerElement.innerHTML === ''){
-                    setTimeout(function(){
+                    //setTimeout(function(){
                         computerElement.innerHTML = 'O';
                         gridData[randomNumber] = computerElement.innerHTML;      
                         setGridData({ ...gridData });  
     
-                        takenGrids = Object.keys(gridData);
+                        //takenGrids = Object.keys(gridData);
                         //console.log('taken grids', takenGrids);
-                    }, 300);
-                  
-                }
-            }      
-           
-            //console.log('playerElement', playerElement);
-            //console.log('computerElement', computerElement);
-            //console.log('gridData in gridCellOnClick', gridData);
-        }   
-        
-        let regX = new RegExp('X','gi');
-        let regO = new RegExp('O', 'gi');        
 
-        gameWinner();
-       
+                       
+
+                    //}, 300);                  
+                }     
+                
+                if( Object.values(gridData) && 
+                ( (Object.values(gridData).join('').match(regX) && Object.values(gridData).join('').match(regX).length >= 3) || 
+                  (Object.values(gridData).join('').match(regO) && Object.values(gridData).join('').match(regO).length) >= 3) ){
+                    debugger;
+                  gameStatsUpdate();
+              }   
+            }                             
+            //console.log('gridData in gridCellOnClick', gridData);
+        }                 
+     
         // if(Object.keys(gridData).length >= 9 && Object.values(gridData).join('').match(regX).length > Object.values(gridData).join('').match(regO).length){                     
         //     setPlayerScore(playerScore + 1);   
         //     setGameOver(true); 
@@ -126,7 +145,8 @@ function TicTacToeGrid(props) {
         //     setGameOverMsg("IT'S A TIE!!!");
         // }
 
-        if(Object.keys(gridData).length >= 9 || gameOver){           
+        if(Object.keys(gridData).length >= 9 || gameOver){       
+            debugger;    
             gameStatusModalOpen = true;
             setGameStatusModalOpen(true);            
         }else{

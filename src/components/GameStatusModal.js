@@ -35,7 +35,7 @@ export default function GameStatusModal(props) {
           <Button variant="outlined" size="small" color="success" style={{ marginRight: '5%' }} onClick={handleNewGameClick}> 
             NEW GAME 
           </Button>
-          <Button variant="outlined" size="small" onClick={handleCancelClick}> CANCEL </Button>
+          <Button variant="outlined" size="small" onClick={handleCancelClick}> DISMISS </Button>
         </DialogActions>
       </Dialog>
     </div>

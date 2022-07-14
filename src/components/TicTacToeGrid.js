@@ -23,6 +23,10 @@ function TicTacToeGrid(props) {
 
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
+    const computerMoves = () => {
+        
+    }
+
     const gameStatsUpdate = () => {               
         for(let i = 0; i < answerArr.length; i++) {
             let containsGridCell = answerArr[i].every(element => {               
@@ -118,11 +122,11 @@ function TicTacToeGrid(props) {
         }               
             
         if(gameOver){       
-            debugger;    
+            //debugger;    
             gameStatusModalOpen = true;
             setGameStatusModalOpen(true);            
         }else{
-            debugger;
+            //debugger;
             gameStatusModalOpen = false;
             setGameStatusModalOpen(false);
         }

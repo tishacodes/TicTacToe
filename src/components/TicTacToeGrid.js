@@ -24,7 +24,7 @@ function TicTacToeGrid(props) {
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
     const computerMoves = () => {
-        
+
     }
 
     const gameStatsUpdate = () => {               
@@ -74,7 +74,7 @@ function TicTacToeGrid(props) {
     }
     
     const gridCellOnClick = (event) => {        
-        //console.log('on click', event);
+        console.log('on click', event);
         let elementId = event && event.target && event.target.id ? event.target.id : null;
         let takenGrids = [];
         let randomNumber = null;
@@ -89,11 +89,10 @@ function TicTacToeGrid(props) {
             let regX = new RegExp('X','gi');
             let regO = new RegExp('O', 'gi'); 
             
-            if(playerElement.innerHTML === ''){
-                playerElement.innerHTML = 'X';
+            if(playerElement.innerHTML === '') {                
+                playerElement.innerHTML = 'X';               
                 gridData[elementId] = playerElement.innerHTML;      
                 setGridData({ ...gridData });      
-
                 takenGrids = Object.keys(gridData);                
 
                 do{
@@ -101,35 +100,39 @@ function TicTacToeGrid(props) {
 
                 }while(takenGrids.includes(randomNumber.toString()) && takenGrids.length < 9);               
                 
-                let computerElement = document.getElementById(randomNumber);                
-
-                if(computerElement.innerHTML === ''){                
-                    //setTimeout(function(){
-                        //debugger;
-                        computerElement.innerHTML = 'O';
-                        gridData[randomNumber] = computerElement.innerHTML;      
-                        setGridData({ ...gridData });                                             
-                    //}, 300);                               
-                }     
+                let computerElement = document.getElementById(randomNumber);               
                 
-                if( Object.values(gridData) && 
-                ( (Object.values(gridData).join('').match(regX) && Object.values(gridData).join('').match(regX).length >= 3) || 
-                  (Object.values(gridData).join('').match(regO) && Object.values(gridData).join('').match(regO).length) >= 3) ){
-                    //debugger;
-                  gameStatsUpdate();
-              }   
+                setTimeout(function(){     
+
+                    if(computerElement.innerHTML === ''){                
+                        //setTimeout(function(){                        
+                            //computerElement.classList.toggle('grid-cell-animation');                   
+                            computerElement.innerHTML = 'O';
+                            gridData[randomNumber] = computerElement.innerHTML;      
+                            setGridData({ ...gridData });                                             
+                        //}, 300);                               
+                    }     
+                    
+                    if( Object.values(gridData) && 
+                    ( (Object.values(gridData).join('').match(regX) && Object.values(gridData).join('').match(regX).length >= 3) || 
+                    (Object.values(gridData).join('').match(regO) && Object.values(gridData).join('').match(regO).length) >= 3) ){
+                        //debugger;
+                    gameStatsUpdate();
+                    }  
+                
+                    if(gameOver){       
+                        //debugger;    
+                        gameStatusModalOpen = true;
+                        setGameStatusModalOpen(true);            
+                    }else{
+                        //debugger;
+                        gameStatusModalOpen = false;
+                        setGameStatusModalOpen(false);
+                    }
+
+                }, 500);
             }       
-        }               
-            
-        if(gameOver){       
-            //debugger;    
-            gameStatusModalOpen = true;
-            setGameStatusModalOpen(true);            
-        }else{
-            //debugger;
-            gameStatusModalOpen = false;
-            setGameStatusModalOpen(false);
-        }
+        }                 
     }    
  
     return(
@@ -146,39 +149,39 @@ function TicTacToeGrid(props) {
             <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
                 <div key = {1} id = {1} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"> 
-                        {gridData['1']} 
+                        {gridData['1']}
                 </div>
                 <div key = {2} id = {2} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-top"> 
-                        {gridData['2']} 
+                        {gridData['2']}
                 </div>
                 <div key = {3} id = {3} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right"> 
-                        {gridData['3']} 
+                        {gridData['3']}
                 </div>
                 <div key = {4} id = {4} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-left"> 
-                        {gridData['4']} 
+                        {gridData['4']}
                 </div>
                 <div key = {5} id = {5} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell"> 
-                        {gridData['5']} 
+                        {gridData['5']}
                 </div>
                 <div key = {6} id = {6} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-right"> 
-                        {gridData['6']} 
+                        {gridData['6']}
                 </div>
                 <div key = {7} id = {7} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left"> 
-                        {gridData['7']} 
+                        {gridData['7']}
                 </div>
                 <div key = {8} id = {8} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-bottom"> 
-                        {gridData['8']} 
+                        {gridData['8']}
                 </div>
                 <div key = {9} id = {9} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right"> 
-                        {gridData['9']} 
+                        {gridData['9']}
                 </div>
             </div>
 

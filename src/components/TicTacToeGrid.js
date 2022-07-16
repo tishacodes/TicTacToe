@@ -4,24 +4,24 @@ import ScoreBoard from './ScoreBoard';
 import GameStatusModal from './GameStatusModal';
 import { motion } from "framer-motion";
 
-function TicTacToeGrid(props) {
-    const [isAnimationActive, setIsAnimationActive] = useState(false);
+function TicTacToeGrid(props) {   
     let [gameOverMsg, setGameOverMsg] = useState('');
     let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
     let [gameOver, setGameOver] = useState(false);
-    const [gridData, setGridData] = useState({
-        // 1: 'X',
-        // 2: 'O',
-        // 3: 'X',
-        // 4: '',
-        // 5: '',
-        // 6: '',
-        // 7: '',
-        // 8: '',
-        // 9: ''
-    });
+    const [gridData, setGridData] = useState({});
+
+    //animation
+    const [isAnimationActiveCell1, setIsAnimationActiveCell1] = useState(false);
+    const [isAnimationActiveCell2, setIsAnimationActiveCell2] = useState(false);
+    const [isAnimationActiveCell3, setIsAnimationActiveCell3] = useState(false);
+    const [isAnimationActiveCell4, setIsAnimationActiveCell4] = useState(false);
+    const [isAnimationActiveCell5, setIsAnimationActiveCell5] = useState(false);
+    const [isAnimationActiveCell6, setIsAnimationActiveCell6] = useState(false);
+    const [isAnimationActiveCell7, setIsAnimationActiveCell7] = useState(false);
+    const [isAnimationActiveCell8, setIsAnimationActiveCell8] = useState(false);
+    const [isAnimationActiveCell9, setIsAnimationActiveCell9] = useState(false);
 
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
@@ -81,7 +81,7 @@ function TicTacToeGrid(props) {
         let takenGrids = [];
         let randomNumber = null;
 
-        setIsAnimationActive(!isAnimationActive)
+        //setIsAnimationActive(!isAnimationActive)
 
         if(gameOver){
             //debugger;
@@ -93,9 +93,14 @@ function TicTacToeGrid(props) {
             let regX = new RegExp('X','gi');
             let regO = new RegExp('O', 'gi'); 
             
-            if(playerElement) {                
-                playerElement.firstChild.innerHTML = 'X';               
-                gridData[elementId] = playerElement.firstChild.innerHTML;      
+            if(playerElement.innerHTML === '') {                
+                playerElement.innerHTML = 'X';    
+
+                //playerElement.style.color = ''
+                playerElement.style.color = '#8e9095';                    
+                //console.log('playerElement style', playerElement.style);    
+
+                gridData[elementId] = playerElement.innerHTML;      
                 setGridData({ ...gridData });      
                 takenGrids = Object.keys(gridData);                
 
@@ -151,91 +156,53 @@ function TicTacToeGrid(props) {
             />
 
             <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
-                <motion.div key = {1} id = {1} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"                    
-                     animate={{
-                        scale: isAnimationActive ? [1, 1.1, 1.1, 1, 1] : 1,
-                        //rotate: isAnimationActive ? [0, 0, 270, 270, 0] : 0,
-                        //borderRadius: isAnimationActive ? ["20%", "20%", "50%", "50%", "20%"] : 0,
-                      }}
+                <div key = {1} id = {1} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"                     
                 > 
-                        {gridData['1']}
-                </motion.div>
-                <motion.div key = {2} id = {2} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-top"
-                     animate={{
-                        //rotate: isAnimationActive ? 360 : 0
-                        //scale: isAnimationActive ? [1, 1.1, 1.1, 1, 1] : 1,
-                     }}
+                    
+                    {gridData['1']}
+                    
+                </div>
+                <div key = {2} id = {2} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top"                     
                 > 
-                        {gridData['2']}
-                </motion.div>
-                <motion.div key = {3} id = {3} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right"
-                     animate={{
-                        //rotate: isAnimationActive ? 360 : 0
-                        //scale: isAnimationActive ? [1, 1.1, 1.1, 1, 1] : 1,
-                     }}
+                    {gridData['2']}
+                </div>
+                <div key = {3} id = {3} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-right"                     
                 > 
-                        {gridData['3']}
-                </motion.div>
-                <motion.div key = {4} id = {4} onClick={(event)=> gridCellOnClick(event)} 
+                    {gridData['3']}
+                </div>
+                <div key = {4} id = {4} onClick={(event)=> gridCellOnClick(event)} 
                      className = "tic-tac-toe-grid-cell grid-cell-no-left"
-                     animate={{
-                        //rotate: isAnimationActive ? 360 : 0
-                     }}
+                     
                 > 
-                        {gridData['4']}
-                </motion.div>
-                <motion.div key = {5} id = {5} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell"
-                     animate={{
-                        //scale: isAnimationActive ? [1, 1.1, 1.1, 1, 1] : 1,
-                        //scale: isAnimationActive ? [1, 2, 2, 1, 1] : 1,
-                        //rotate: isAnimationActive ? [0, 0, 270, 270, 0] : 0,
-                        //borderRadius: isAnimationActive ? ["20%", "20%", "50%", "50%", "20%"] : 0,
-                      }}
+                    {gridData['4']}
+                </div>
+                <div key = {5} id = {5} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell"                     
                 > 
-                        {gridData['5']}
-                </motion.div>
-                <motion.div key = {6} id = {6} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-right"
-                     animate={{
-                        //rotate: isAnimationActive ? 360 : 0
-                        //scale: isAnimationActive ? [1, 1.1, 1.1, 1, 1] : 1,
-                     }}
+                    {gridData['5']}
+                </div>
+                <div key = {6} id = {6} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-right"                     
                 > 
-                        {gridData['6']}
-                </motion.div>
-                <motion.div key = {7} id = {7} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left"
-                     animate={{
-                        //rotate: isAnimationActive ? 360 : 0                        
-                     }}
+                    {gridData['6']}
+                </div>
+                <div key = {7} id = {7} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-left"                     
                 > 
-                        {gridData['7']}
-                </motion.div>
-                <motion.div key = {8} id = {8} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom"
-                     animate={{
-                        //rotate: isAnimationActive ? 360 : 0
-                        //scale: isAnimationActive ? [1, 1.1, 1.1, 1, 1] : 1,
-                     }}
+                    {gridData['7']}
+                </div>
+                <div key = {8} id = {8} onClick={(event)=> gridCellOnClick(event)} 
+                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom"                     
                 > 
-                        {gridData['8']}
-                </motion.div>
+                    {gridData['8']}
+                </div>
                 <div key = {9} id = {9} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right">
-                    <motion.div 
-                        animate={{
-                            scale: isAnimationActive ? [1, 1.5, 1.5, 1, 1] : 1,
-                            //scale: isAnimationActive ? [1, 2, 2, 1, 1] : 1,
-                            rotate: isAnimationActive ? [0, 0, 270, 270, 0] : 0,
-                            //borderRadius: isAnimationActive ? ["20%", "20%", "50%", "50%", "20%"] : 0,
-                        }}
-                    > 
-                        {gridData['9']}
-                    </motion.div>
+                     className = "tic-tac-toe-grid-cell grid-cell-no-bottom grid-cell-no-right"
+                >                    
+                    {gridData['9']}                   
                 </div>
             </div>
 

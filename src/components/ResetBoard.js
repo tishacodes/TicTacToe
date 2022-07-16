@@ -35,6 +35,7 @@ function ResetBoard(props) {
         event.preventDefault(); 
         props.setGridData({});
         props.setGameOver(false);
+        props.resetAnimation();
     }
 
     return(

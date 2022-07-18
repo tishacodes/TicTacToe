@@ -76,11 +76,91 @@ function TicTacToeGrid(props) {
         }
     }
 
-    const computerMoves = () => {
+    const addToRandomCell = () => {        
+        let randomNumber = null; 
+        let takenGrids = [];
+        takenGrids = Object.keys(gridData);
 
+        do{
+            randomNumber = Math.floor(Math.random() * 9) + 1;
+        }while(takenGrids.includes(randomNumber.toString()) && takenGrids.length < 9);               
+                
+        let computerElement = document.getElementById(randomNumber);  
+        
+        if(computerElement.firstChild.innerHTML === ''){               
+            computerElement.firstChild.innerHTML = 'O';
+            gridData[randomNumber] = computerElement.firstChild.innerHTML;      
+            setGridData({ ...gridData });                                                      
+        }        
     }
 
-    const gameStatsUpdate = () => {               
+    const computerMoves = () => {       
+        if(gameOver){                 
+            return;
+        }
+       
+        let regO = new RegExp('O', 'gi');         
+        let twoOsNoXIndex = null, twoXNoOIndex = null, oneOnoXIndex = null;
+        let computerElement = null;
+
+        if( Object.values(gridData) && !Object.values(gridData).join('').match(regO) ){          
+            addToRandomCell();
+            return;
+        }
+
+        for(let i = 0; i < answerArr.length; i++){
+            let xCount = 0, oCount = 0, nullCount = 0, nullIndex = null;
+
+            for(let j = 0; j < answerArr[i].length; j++){
+                if(gridData[answerArr[i][j]] === 'X'){
+                    xCount++;
+                }
+
+                if(gridData[answerArr[i][j]] === 'O'){
+                    oCount++;
+                }
+
+                if(!gridData[answerArr[i][j]]){                   
+                    nullCount++;
+                    nullIndex = answerArr[i][j];
+                }
+            }
+
+            if(oCount === 2 && xCount === 0 && nullIndex){
+                twoOsNoXIndex = nullIndex;                
+                //break;  
+                   
+            }else if(xCount === 2 && oCount === 0 && nullIndex){
+                twoXNoOIndex = nullIndex;                
+                //break;      
+            }
+        }
+        
+        if(twoOsNoXIndex){          
+            computerElement = document.getElementById(twoOsNoXIndex);  
+    
+            if(computerElement.firstChild.innerHTML === ''){               
+                computerElement.firstChild.innerHTML = 'O';
+                gridData[twoOsNoXIndex] = computerElement.firstChild.innerHTML;      
+                setGridData({ ...gridData });                                                      
+            }            
+               
+        }else if(twoXNoOIndex){          
+            computerElement = document.getElementById(twoXNoOIndex);  
+    
+            if(computerElement.firstChild.innerHTML === ''){               
+                computerElement.firstChild.innerHTML = 'O';
+                gridData[twoXNoOIndex] = computerElement.firstChild.innerHTML;      
+                setGridData({ ...gridData });                                                      
+            }  
+                
+        }else {
+            addToRandomCell();
+        }    
+    }
+
+    const gameStatsUpdate = () => {       
+
         for(let i = 0; i < answerArr.length; i++) {
             let containsGridCell = answerArr[i].every(element => {               
                 return Object.keys(gridData).includes(element.toString());
@@ -128,16 +208,12 @@ function TicTacToeGrid(props) {
         }
     }
     
-    const gridCellOnClick = (event) => {        
-        console.log('on click', event);
+    const gridCellOnClick = (event) => {       
         let elementId = event && event.target && event.target.id ? event.target.id : null;
-        let takenGrids = [];
-        let randomNumber = null;
+        //let takenGrids = [];
+        //let randomNumber = null;        
 
-        //setIsAnimationActive(!isAnimationActive)
-
-        if(gameOver){
-            //debugger;
+        if(gameOver){            
             return;
         }
        
@@ -147,57 +223,40 @@ function TicTacToeGrid(props) {
             let regO = new RegExp('O', 'gi'); 
             
             if(playerElement.firstChild.innerHTML === '') {                
-                playerElement.firstChild.innerHTML = 'X';    
-
-                
-                //setIsAnimationActiveCell1(true);
-
-                //playerElement.style.color = ''
-                //playerElement.style.color = '#8e9095';                    
-                //console.log('playerElement style', playerElement.style);    
-                console.log('first child', playerElement.firstChild.innerHTML);
-
+                playerElement.firstChild.innerHTML = 'X';                                  
                 gridData[elementId] = playerElement.firstChild.innerHTML;      
-                setGridData({ ...gridData });      
-                takenGrids = Object.keys(gridData);                
-
-                do{
-                    randomNumber = Math.floor(Math.random() * 9) + 1;
-
-                }while(takenGrids.includes(randomNumber.toString()) && takenGrids.length < 9);               
-                
-                let computerElement = document.getElementById(randomNumber);               
-                
-                setTimeout(function(){     
-
-                    if(computerElement.firstChild.innerHTML === ''){                
-                        //setTimeout(function(){                        
-                            //computerElement.classList.toggle('grid-cell-animation');                   
-                            computerElement.firstChild.innerHTML = 'O';
-                            gridData[randomNumber] = computerElement.firstChild.innerHTML;      
-                            setGridData({ ...gridData });                                             
-                        //}, 300);                               
-                    }     
+                setGridData({ ...gridData });             
+                                               
+                setTimeout(function(){ 
                     
                     if( Object.values(gridData) && 
                     ( (Object.values(gridData).join('').match(regX) && Object.values(gridData).join('').match(regX).length >= 3) || 
-                    ( Object.values(gridData).join('').match(regO) && Object.values(gridData).join('').match(regO).length) >= 3) ){
-                        //debugger;
+                    ( Object.values(gridData).join('').match(regO) && Object.values(gridData).join('').match(regO).length) >= 3) ){                        
                         gameStatsUpdate();
-                    }  
+                    }   
 
-                    setTimeout(function(){ 
-                
-                        if(gameOver){       
-                            //debugger;    
+                    computerMoves();
+
+                    // if(computerElement.firstChild.innerHTML === ''){               
+                        // computerElement.firstChild.innerHTML = 'O';
+                        // gridData[randomNumber] = computerElement.firstChild.innerHTML;      
+                        // setGridData({ ...gridData });                                                   
+                    // }                   
+                    
+                    if( Object.values(gridData) && 
+                    ( (Object.values(gridData).join('').match(regX) && Object.values(gridData).join('').match(regX).length >= 3) || 
+                    ( Object.values(gridData).join('').match(regO) && Object.values(gridData).join('').match(regO).length) >= 3) ){                        
+                        gameStatsUpdate();
+                    }   
+                                         
+                    setTimeout(function(){                
+                        if(gameOver){                                     
                             gameStatusModalOpen = true;
                             setGameStatusModalOpen(true);            
-                        }else{
-                            //debugger;
+                        }else{                            
                             gameStatusModalOpen = false;
                             setGameStatusModalOpen(false);
                         }
-
                     }, 800);
 
                 }, 300);

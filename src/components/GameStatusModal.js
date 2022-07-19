@@ -11,7 +11,7 @@ export default function GameStatusModal(props) {
     props.setGridData({});
     props.setGameStatusModalOpen(false);
     props.setGameOver(false);
-    props.resetAnimation();
+    props.resetAnimation();      
   };
 
   const handleCancelClick = () => {

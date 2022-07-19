@@ -21,7 +21,7 @@ function ResetBoard(props) {
             setNewButtonDisabled(false);
         }else{
             setNewButtonDisabled(true);
-        }
+        }          
 
     }, [props.playerScore, props.computerScore, props.gridData]);   
 
@@ -35,7 +35,7 @@ function ResetBoard(props) {
         event.preventDefault(); 
         props.setGridData({});
         props.setGameOver(false);
-        props.resetAnimation();
+        props.resetAnimation();      
     }
 
     return(

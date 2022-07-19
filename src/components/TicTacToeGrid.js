@@ -4,12 +4,13 @@ import ScoreBoard from './ScoreBoard';
 import GameStatusModal from './GameStatusModal';
 import { motion } from "framer-motion";
 
-function TicTacToeGrid(props) {   
-    let [gameOverMsg, setGameOverMsg] = useState('');
-    let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
+function TicTacToeGrid(props) {      
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
+    const [lastWinner, setLastWinner] = useState('');
     let [gameOver, setGameOver] = useState(false);
+    let [gameOverMsg, setGameOverMsg] = useState('');
+    let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     const [gridData, setGridData] = useState({});
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
@@ -36,8 +37,7 @@ function TicTacToeGrid(props) {
         setIsAnimationActiveCell9(false);
     }
 
-    const setAnimationActiveCells = (winningCellsArr) => {
-        console.log('winningCellsArr', winningCellsArr);
+    const setAnimationActiveCells = (winningCellsArr) => {      
         for(let i = 0; i < winningCellsArr.length; i++){
             //let stateName = `setIsAnimationActiveCell${winningCellsArr[i]}`;
             //console.log('state name', stateName);           
@@ -76,7 +76,7 @@ function TicTacToeGrid(props) {
         }
     }
 
-    const addToRandomCell = () => {        
+    const addToRandomCell = () => {             
         let randomNumber = null; 
         let takenGrids = [];
         takenGrids = Object.keys(gridData);
@@ -94,22 +94,22 @@ function TicTacToeGrid(props) {
         }        
     }
 
-    const computerMoves = () => {       
-        if(gameOver){                 
+    const computerMoves = () => {        
+        if(gameOver){                  
             return;
         }
        
         let regO = new RegExp('O', 'gi');         
-        let twoOsNoXIndex = null, twoXNoOIndex = null, oneOnoXIndex = null;
+        let twoOsNoXIndex = null, twoXNoOIndex = null;
         let computerElement = null;
 
-        if( Object.values(gridData) && !Object.values(gridData).join('').match(regO) ){          
+        if( Object.values(gridData) && !Object.values(gridData).join('').match(regO) ){                    
             addToRandomCell();
             return;
         }
 
         for(let i = 0; i < answerArr.length; i++){
-            let xCount = 0, oCount = 0, nullCount = 0, nullIndex = null;
+            let xCount = 0, oCount = 0, nullIndex = null;
 
             for(let j = 0; j < answerArr[i].length; j++){
                 if(gridData[answerArr[i][j]] === 'X'){
@@ -120,19 +120,17 @@ function TicTacToeGrid(props) {
                     oCount++;
                 }
 
-                if(!gridData[answerArr[i][j]]){                   
-                    nullCount++;
+                if(!gridData[answerArr[i][j]]){                  
                     nullIndex = answerArr[i][j];
                 }
             }
 
             if(oCount === 2 && xCount === 0 && nullIndex){
                 twoOsNoXIndex = nullIndex;                
-                //break;  
-                   
-            }else if(xCount === 2 && oCount === 0 && nullIndex){
+                break;                   
+            }else if( (i !== Math.floor(Math.random() * 8)) && xCount === 2 && oCount === 0 && nullIndex ){
                 twoXNoOIndex = nullIndex;                
-                //break;      
+                break;      
             }
         }
         
@@ -185,6 +183,7 @@ function TicTacToeGrid(props) {
                     setAnimationActiveCells(answerArr[i]);
                     setPlayerScore(playerScore + 1);
                     setGameOverMsg('YOU WIN!!!'); 
+                    setLastWinner('Player');
                     gameOver = true;
                     setGameOver(true);                    
                     break;
@@ -193,6 +192,7 @@ function TicTacToeGrid(props) {
                     setAnimationActiveCells(answerArr[i]);
                     setComputerScore(computerScore + 1);
                     setGameOverMsg('COMPUTER WINS!!!');
+                    setLastWinner('Computer');
                     gameOver = true;
                     setGameOver(true);
                     break;
@@ -203,6 +203,7 @@ function TicTacToeGrid(props) {
         if(!gameOver && Object.keys(gridData).length === 9) {
             //debugger;
             setGameOverMsg("IT'S A TIE!!!");
+            setLastWinner('');
             gameOver = true;
             setGameOver(true);            
         }
@@ -237,7 +238,7 @@ function TicTacToeGrid(props) {
 
                     computerMoves();
 
-                    // if(computerElement.firstChild.innerHTML === ''){               
+                    //if(computerElement.firstChild.innerHTML === ''){               
                         // computerElement.firstChild.innerHTML = 'O';
                         // gridData[randomNumber] = computerElement.firstChild.innerHTML;      
                         // setGridData({ ...gridData });                                                   
@@ -272,8 +273,11 @@ function TicTacToeGrid(props) {
                         computerScore={computerScore}
                         setPlayerScore={setPlayerScore} 
                         setComputerScore={setComputerScore}
+                        gameOver={gameOver}
                         setGameOver={setGameOver}
                         resetAnimation={resetAnimation}
+                        lastWinner={lastWinner}
+                        computerMoves={computerMoves}
             />
 
             <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
@@ -402,6 +406,8 @@ function TicTacToeGrid(props) {
                              setGridData={setGridData} 
                              setGameOver={setGameOver}
                              resetAnimation={resetAnimation}
+                             lastWinner={lastWinner}
+                             computerMoves={computerMoves}
 
             />
         </div>

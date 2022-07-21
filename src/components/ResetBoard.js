@@ -17,7 +17,6 @@ function ResetBoard(props) {
         }
 
         if(props.gridData && Object.keys(props.gridData) && Object.keys(props.gridData).length && Object.keys(props.gridData).length > 0){  
-            //console.log('props.gridData', props.gridData);                      
             setNewButtonDisabled(false);
         }else{
             setNewButtonDisabled(true);
@@ -32,10 +31,14 @@ function ResetBoard(props) {
     }
 
     const refreshGameBoard = (event) => {
-        event.preventDefault(); 
+        //event.preventDefault(); 
         props.setGridData({});
         props.setGameOver(false);
-        props.resetAnimation();      
+        props.resetAnimation();     
+
+        if(props.lastWinner === 'Player'){
+            props.setComputerFirstMove(true);            
+        }       
     }
 
     return(

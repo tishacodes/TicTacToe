@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ResetBoard from './ResetBoard';
 import ScoreBoard from './ScoreBoard';
 import GameStatusModal from './GameStatusModal';
@@ -7,7 +7,8 @@ import { motion } from "framer-motion";
 function TicTacToeGrid(props) {      
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
-    const [lastWinner, setLastWinner] = useState('');
+    let [lastWinner, setLastWinner] = useState('');
+    let [computerFirstMove, setComputerFirstMove] = useState(false);
     let [gameOver, setGameOver] = useState(false);
     let [gameOverMsg, setGameOverMsg] = useState('');
     let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
@@ -24,6 +25,12 @@ function TicTacToeGrid(props) {
     const [isAnimationActiveCell7, setIsAnimationActiveCell7] = useState(false);
     const [isAnimationActiveCell8, setIsAnimationActiveCell8] = useState(false);
     const [isAnimationActiveCell9, setIsAnimationActiveCell9] = useState(false);   
+
+    useEffect( () => {       
+        if(computerFirstMove){           
+            computerMoves();
+        }              
+    }, [gameOver, computerFirstMove]);
 
     const resetAnimation = () => {
         setIsAnimationActiveCell1(false);
@@ -94,8 +101,8 @@ function TicTacToeGrid(props) {
         }        
     }
 
-    const computerMoves = () => {        
-        if(gameOver){                  
+    const computerMoves = () => {
+        if(gameOver && !computerFirstMove){                  
             return;
         }
        
@@ -127,11 +134,13 @@ function TicTacToeGrid(props) {
 
             if(oCount === 2 && xCount === 0 && nullIndex){
                 twoOsNoXIndex = nullIndex;                
-                break;                   
+                //break;                   
             }else if( (i !== Math.floor(Math.random() * 8)) && xCount === 2 && oCount === 0 && nullIndex ){
                 twoXNoOIndex = nullIndex;                
-                break;      
+                //break;      
             }
+
+            setComputerFirstMove(false);
         }
         
         if(twoOsNoXIndex){          
@@ -183,6 +192,7 @@ function TicTacToeGrid(props) {
                     setAnimationActiveCells(answerArr[i]);
                     setPlayerScore(playerScore + 1);
                     setGameOverMsg('YOU WIN!!!'); 
+                    lastWinner = 'Player';
                     setLastWinner('Player');
                     gameOver = true;
                     setGameOver(true);                    
@@ -192,6 +202,7 @@ function TicTacToeGrid(props) {
                     setAnimationActiveCells(answerArr[i]);
                     setComputerScore(computerScore + 1);
                     setGameOverMsg('COMPUTER WINS!!!');
+                    lastWinner = 'Computer';
                     setLastWinner('Computer');
                     gameOver = true;
                     setGameOver(true);
@@ -203,6 +214,7 @@ function TicTacToeGrid(props) {
         if(!gameOver && Object.keys(gridData).length === 9) {
             //debugger;
             setGameOverMsg("IT'S A TIE!!!");
+            lastWinner = '';
             setLastWinner('');
             gameOver = true;
             setGameOver(true);            
@@ -277,7 +289,8 @@ function TicTacToeGrid(props) {
                         setGameOver={setGameOver}
                         resetAnimation={resetAnimation}
                         lastWinner={lastWinner}
-                        computerMoves={computerMoves}
+                        computerMoves={computerMoves}                        
+                        setComputerFirstMove={setComputerFirstMove}
             />
 
             <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
@@ -408,7 +421,7 @@ function TicTacToeGrid(props) {
                              resetAnimation={resetAnimation}
                              lastWinner={lastWinner}
                              computerMoves={computerMoves}
-
+                             setComputerFirstMove={setComputerFirstMove}
             />
         </div>
     );

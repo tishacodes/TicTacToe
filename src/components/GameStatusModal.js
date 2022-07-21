@@ -11,7 +11,11 @@ export default function GameStatusModal(props) {
     props.setGridData({});
     props.setGameStatusModalOpen(false);
     props.setGameOver(false);
-    props.resetAnimation();      
+    props.resetAnimation();
+    
+    if(props.lastWinner === 'Player'){
+      props.setComputerFirstMove(true);            
+    }      
   };
 
   const handleCancelClick = () => {

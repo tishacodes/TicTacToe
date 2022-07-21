@@ -33,15 +33,10 @@ function TicTacToeGrid(props) {
     }, [gameOver, computerFirstMove]);
 
     const resetAnimation = () => {
-        setIsAnimationActiveCell1(false);
-        setIsAnimationActiveCell2(false);
-        setIsAnimationActiveCell3(false);
-        setIsAnimationActiveCell4(false);
-        setIsAnimationActiveCell5(false);
-        setIsAnimationActiveCell6(false);
-        setIsAnimationActiveCell7(false);
-        setIsAnimationActiveCell8(false);
-        setIsAnimationActiveCell9(false);
+        for(let i = 1; i <= 9; i++){
+            let resetAnimation = `setIsAnimationActiveCell${i}(false)`;  
+            eval(resetAnimation);            
+        }       
     }
 
     const setAnimationActiveCells = (winningCellsArr) => {      
@@ -173,8 +168,7 @@ function TicTacToeGrid(props) {
                 return Object.keys(gridData).includes(element.toString());
             });           
 
-            if(containsGridCell) {      
-                //debugger;         
+            if(containsGridCell) {                            
                 let xCount = 0, oCount = 0;
 
                 for(let j = 0; j < answerArr[i].length; j++) {
@@ -187,8 +181,7 @@ function TicTacToeGrid(props) {
                     }
                 }
 
-                if(xCount === 3) {
-                    //debugger;
+                if(xCount === 3) {                    
                     setAnimationActiveCells(answerArr[i]);
                     setPlayerScore(playerScore + 1);
                     setGameOverMsg('YOU WIN!!!'); 
@@ -197,8 +190,7 @@ function TicTacToeGrid(props) {
                     gameOver = true;
                     setGameOver(true);                    
                     break;
-                }else if(oCount === 3) {
-                    //debugger;
+                }else if(oCount === 3) {                   
                     setAnimationActiveCells(answerArr[i]);
                     setComputerScore(computerScore + 1);
                     setGameOverMsg('COMPUTER WINS!!!');
@@ -211,8 +203,7 @@ function TicTacToeGrid(props) {
             }                            
         }
 
-        if(!gameOver && Object.keys(gridData).length === 9) {
-            //debugger;
+        if(!gameOver && Object.keys(gridData).length === 9) {            
             setGameOverMsg("IT'S A TIE!!!");
             lastWinner = '';
             setLastWinner('');
@@ -222,9 +213,7 @@ function TicTacToeGrid(props) {
     }
     
     const gridCellOnClick = (event) => {       
-        let elementId = event && event.target && event.target.id ? event.target.id : null;
-        //let takenGrids = [];
-        //let randomNumber = null;        
+        let elementId = event && event.target && event.target.id ? event.target.id : null;              
 
         if(gameOver){            
             return;
@@ -248,13 +237,7 @@ function TicTacToeGrid(props) {
                         gameStatsUpdate();
                     }   
 
-                    computerMoves();
-
-                    //if(computerElement.firstChild.innerHTML === ''){               
-                        // computerElement.firstChild.innerHTML = 'O';
-                        // gridData[randomNumber] = computerElement.firstChild.innerHTML;      
-                        // setGridData({ ...gridData });                                                   
-                    // }                   
+                    computerMoves();                                    
                     
                     if( Object.values(gridData) && 
                     ( (Object.values(gridData).join('').match(regX) && Object.values(gridData).join('').match(regX).length >= 3) || 

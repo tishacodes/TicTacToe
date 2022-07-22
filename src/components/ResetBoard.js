@@ -30,8 +30,7 @@ function ResetBoard(props) {
         props.setComputerScore(0);
     }
 
-    const refreshGameBoard = (event) => {
-        //event.preventDefault(); 
+    const refreshGameBoard = (event) => {        
         props.setGridData({});
         props.setGameOver(false);
         props.resetAnimation();     

@@ -5,6 +5,7 @@ import GameStatusModal from './GameStatusModal';
 import { motion } from "framer-motion";
 
 function TicTacToeGrid(props) {      
+    const NUM_OF_CELLS = 9;
     const [playerScore, setPlayerScore] = useState(0);
     const [computerScore, setComputerScore] = useState(0);
     let [lastWinner, setLastWinner] = useState('');
@@ -15,7 +16,7 @@ function TicTacToeGrid(props) {
     const [gridData, setGridData] = useState({});
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
-    //animation
+    //animation    
     const [isAnimationActiveCell1, setIsAnimationActiveCell1] = useState(false);
     const [isAnimationActiveCell2, setIsAnimationActiveCell2] = useState(false);
     const [isAnimationActiveCell3, setIsAnimationActiveCell3] = useState(false);
@@ -24,7 +25,7 @@ function TicTacToeGrid(props) {
     const [isAnimationActiveCell6, setIsAnimationActiveCell6] = useState(false);
     const [isAnimationActiveCell7, setIsAnimationActiveCell7] = useState(false);
     const [isAnimationActiveCell8, setIsAnimationActiveCell8] = useState(false);
-    const [isAnimationActiveCell9, setIsAnimationActiveCell9] = useState(false);   
+    const [isAnimationActiveCell9, setIsAnimationActiveCell9] = useState(false);      
 
     useEffect( () => {       
         if(computerFirstMove){           
@@ -33,7 +34,7 @@ function TicTacToeGrid(props) {
     }, [gameOver, computerFirstMove]);
 
     const resetAnimation = () => {
-        for(let i = 1; i <= 9; i++){
+        for(let i = 1; i <= NUM_OF_CELLS; i++){
             let resetAnimation = `setIsAnimationActiveCell${i}(false)`;  
             eval(resetAnimation);            
         }       
@@ -41,40 +42,8 @@ function TicTacToeGrid(props) {
 
     const setAnimationActiveCells = (winningCellsArr) => {      
         for(let i = 0; i < winningCellsArr.length; i++){
-            //let stateName = `setIsAnimationActiveCell${winningCellsArr[i]}`;
-            //console.log('state name', stateName);           
-        
-            switch(winningCellsArr[i]) {
-                case 1:
-                    setIsAnimationActiveCell1(true);
-                    break
-                case 2:
-                    setIsAnimationActiveCell2(true);
-                    break;
-                case 3:
-                    setIsAnimationActiveCell3(true);
-                    break;
-                case 4:
-                    setIsAnimationActiveCell4(true);
-                    break;
-                case 5:
-                    setIsAnimationActiveCell5(true);
-                    break;
-                case 6:
-                    setIsAnimationActiveCell6(true);
-                    break;
-                case 7:
-                    setIsAnimationActiveCell7(true);
-                    break;
-                case 8:
-                    setIsAnimationActiveCell8(true);
-                    break;
-                case 9:
-                    setIsAnimationActiveCell9(true);
-                    break;
-                default:
-                    //do nothing
-            }
+            let setAnimation = `setIsAnimationActiveCell${winningCellsArr[i]}(true)`;           
+            eval(setAnimation);      
         }
     }
 
@@ -128,11 +97,9 @@ function TicTacToeGrid(props) {
             }
 
             if(oCount === 2 && xCount === 0 && nullIndex){
-                twoOsNoXIndex = nullIndex;                
-                //break;                   
+                twoOsNoXIndex = nullIndex;                           
             }else if( (i !== Math.floor(Math.random() * 8)) && xCount === 2 && oCount === 0 && nullIndex ){
-                twoXNoOIndex = nullIndex;                
-                //break;      
+                twoXNoOIndex = nullIndex;              
             }
 
             setComputerFirstMove(false);

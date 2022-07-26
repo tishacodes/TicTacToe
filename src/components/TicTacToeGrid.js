@@ -94,11 +94,12 @@ function TicTacToeGrid(props) {
                 if(!gridData[answerArr[i][j]]){                  
                     nullIndex = answerArr[i][j];
                 }
-            }           
+            }
 
-            if( (i !== Math.floor(Math.random() * 9) + 1) && oCount === 2 && xCount === 0 && nullIndex ){
+            //answerArr's index goes from 0 to 7, Math.floor(Math.random() * 8) returns a random integer from 0 to 7
+            if( (i !== Math.floor(Math.random() * 8)) && oCount === 2 && xCount === 0 && nullIndex ){
                 twoOsNoXIndex = nullIndex;                           
-            }else if( (i !== Math.floor(Math.random() * 9) + 1) && xCount === 2 && oCount === 0 && nullIndex ){
+            }else if( (i !== Math.floor(Math.random() * 8)) && xCount === 2 && oCount === 0 && nullIndex ){
                 twoXNoOIndex = nullIndex;              
             }
 

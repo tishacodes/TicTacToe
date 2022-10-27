@@ -7,6 +7,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 
 export default function GameStatusModal(props) {
 
+  //reset game stats
   const handleNewGameClick = () => {
     props.setGridData({});
     props.setGameStatusModalOpen(false);

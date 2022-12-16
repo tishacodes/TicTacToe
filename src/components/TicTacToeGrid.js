@@ -15,7 +15,7 @@ function TicTacToeGrid(props) {
     let [gameStatusModalOpen, setGameStatusModalOpen] = useState(false);
     //stores the user and computer selections on the grid, {key -> elementID, value -> X or O}
     const [gridData, setGridData] = useState({});
-    //stores all possible player play combinations
+    //stores all possible winning combinations
     const answerArr = [ [1, 2, 3], [4, 5, 6], [7, 8, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [1, 5, 9], [3, 5, 7] ];
 
     //animation    
@@ -143,7 +143,7 @@ function TicTacToeGrid(props) {
                 gridData[twoXsNoOIndex] = computerElement.firstChild.innerHTML;      
                 setGridData({ ...gridData });                                                      
             }  
-        //assign an O to a random cell if there aren't 2 Os in a row or 2 Xs in a row      
+        //assign an 'O' to a random cell if there aren't 2 Os in a row or 2 Xs in a row      
         }else {
             addToRandomCell();
         }    
@@ -278,7 +278,7 @@ function TicTacToeGrid(props) {
 
             <div id = "tic-tac-toe-grid" className = "tic-tac-toe-grid">
                 <div key = {1} id = {1} onClick={(event)=> gridCellOnClick(event)} 
-                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"                     
+                     className = "tic-tac-toe-grid-cell grid-cell-no-top grid-cell-no-left"                    
                 >
                     <motion.div 
                         animate={{

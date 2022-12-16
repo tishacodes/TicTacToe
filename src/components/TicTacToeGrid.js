@@ -42,6 +42,7 @@ function TicTacToeGrid(props) {
         }       
     }
 
+    //animation
     const setAnimationActiveCells = (winningCellsArr) => {      
         for(let i = 0; i < winningCellsArr.length; i++){
             let setAnimation = `setIsAnimationActiveCell${winningCellsArr[i]}(true)`;           
